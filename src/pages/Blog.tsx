@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CTASection } from "../components/CTASection";
@@ -7,17 +6,6 @@ import { useSEO } from "../hooks/useSEO";
 import { posts } from "../data/posts";
 
 export function Blog() {
-  const sliderImages = ["/blog-1.png", "/blog-2.png", "/blog-3.png", "/blog-4.png", "/blog-5.png"];
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % sliderImages.length);
-    }, 3500);
-
-    return () => window.clearInterval(interval);
-  }, [sliderImages.length]);
-
   useSEO({
     title: "Blog & Faydalı Bilgiler - Vidanjör Hizmetleri",
     description: "Kanal tıkanıklığı, vidanjör kullanımı, altyapı bakımı ve işletmeler için periyodik temizlik konularında güncel içerikler.",
@@ -37,36 +25,6 @@ export function Blog() {
             Vidanjör hizmetleri ve altyapı bakımı hakkında uzman ekibimizden pratik bilgiler.
           </p>
         </div>
-
-        <section className="relative mb-14 overflow-hidden rounded-3xl bg-slate-900 shadow-xl">
-          {sliderImages.map((image, index) => (
-            <div
-              key={image}
-              className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-              style={{
-                backgroundImage: `url('${image}')`,
-                opacity: activeSlide === index ? 0.65 : 0,
-              }}
-            />
-          ))}
-          <div className="relative z-10 p-8 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Sahadan Vidanjör Görselleri</h2>
-            <p className="text-slate-200 max-w-2xl">Ekipmanlarımızı ve çalışma alanlarımızı gösteren görsellerle hizmet kalitemizi yakından inceleyin.</p>
-          </div>
-          <div className="absolute bottom-5 right-5 z-20 flex gap-2">
-            {sliderImages.map((image, index) => (
-              <button
-                key={`${image}-dot`}
-                type="button"
-                onClick={() => setActiveSlide(index)}
-                className={`h-2.5 w-8 rounded-full transition-colors ${
-                  activeSlide === index ? "bg-red-500" : "bg-white/50"
-                }`}
-                aria-label={`Blog slider ${index + 1}`}
-              />
-            ))}
-          </div>
-        </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map(post => (

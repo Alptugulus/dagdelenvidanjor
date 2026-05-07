@@ -3,16 +3,18 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { cn } from "../lib/utils";
 
+/** Global header: viewport üstüne yapışık, tam genişlik; iç boşluklar padding ile */
+const HEADER_NAV_HEIGHT = "h-16";
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -31,24 +33,31 @@ export function Navbar() {
 
   return (
     <>
-      <header 
+      <header
         className={cn(
-          "fixed left-3 right-3 top-2 z-40 h-16 overflow-visible rounded-xl border transition-all duration-300 sm:left-6 sm:right-6 lg:left-10 lg:right-10 md:rounded-2xl",
+          "fixed inset-x-0 top-0 z-40 w-full border-b transition-colors duration-200",
+          HEADER_NAV_HEIGHT,
           isScrolled
-            ? "border-slate-200/90 bg-white/95 shadow-md backdrop-blur-sm"
-            : "border-slate-100/90 bg-white shadow-sm"
+            ? "border-slate-200/90 bg-white/95 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
+            : "border-slate-100 bg-white"
         )}
       >
-        <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="relative h-full">
+        <div
+          className={cn(
+            "mx-auto flex h-full max-w-7xl items-center justify-between gap-4",
+            "px-4 py-2.5 sm:gap-6 sm:px-6 sm:py-3 lg:px-8"
+          )}
+        >
           <Link
             to="/"
-            className="flex h-16 shrink-0 items-center overflow-visible"
+            className="flex min-w-0 shrink items-center overflow-visible py-1"
             aria-label="Anasayfa — Dağdelen Vidanjör"
           >
             <img
               src="/logo-header.png"
               alt="Dağdelen Vidanjör Logo"
-              className="h-10 w-auto max-w-[min(82vw,300px)] object-contain object-left sm:h-11 sm:max-w-[340px] md:h-12 md:max-w-[400px] lg:h-[52px] lg:max-w-[min(460px,calc(100vw-32rem))]"
+              className="h-9 max-h-[calc(100%-0.375rem)] w-auto max-w-[min(75vw,280px)] object-contain object-left sm:h-10 sm:max-w-[min(82vw,320px)] md:h-11 md:max-w-[380px] lg:h-11 lg:max-w-[min(420px,calc(100vw-28rem))]"
               width={937}
               height={242}
               loading="eager"
@@ -56,14 +65,13 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden shrink-0 items-center gap-x-7 md:flex" aria-label="Ana navigasyon">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-red-600",
+                  "text-[0.9375rem] font-medium tracking-tight transition-colors hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2",
                   location.pathname === link.path ? "text-red-600" : "text-slate-600"
                 )}
               >
@@ -72,34 +80,39 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA Button / Mobile Menu Toggle */}
-          <div className="flex items-center space-x-4">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <a
               href="tel:+905422105627"
-              className="hidden md:flex items-center space-x-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-lg shadow-md shadow-red-500/30 border-t border-red-400/30"
+              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-red-500/25 transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transform-none md:inline-flex md:px-6"
             >
-              <PhoneCall className="h-4 w-4" />
+              <PhoneCall className="h-4 w-4" aria-hidden />
               <span>Hemen Ara</span>
             </a>
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden rounded-md p-2 text-slate-600 hover:bg-slate-100"
+              type="button"
+              onClick={() => setIsOpen((o) => !o)}
+              className="rounded-lg p-2.5 text-slate-700 transition-colors hover:bg-slate-100 md:hidden"
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav"
+              aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden absolute inset-x-0 top-full z-30 rounded-b-xl border-x border-b border-slate-100 bg-white shadow-lg">
-            <nav className="flex flex-col space-y-1 px-4 py-6">
+          <div
+            id="mobile-nav"
+            className="absolute inset-x-0 top-full z-50 max-h-[min(70vh,28rem)] overflow-y-auto border-b border-slate-100 bg-white shadow-lg md:hidden"
+          >
+            <nav className="flex flex-col px-4 pb-4 pt-2" aria-label="Mobil navigasyon">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    "block rounded-md px-3 py-3 text-base font-medium",
+                    "rounded-lg px-3 py-3.5 text-base font-medium transition-colors",
                     location.pathname === link.path
                       ? "bg-red-50 text-red-600"
                       : "text-slate-900 hover:bg-slate-50"
@@ -111,6 +124,7 @@ export function Navbar() {
             </nav>
           </div>
         )}
+        </div>
       </header>
     </>
   );
