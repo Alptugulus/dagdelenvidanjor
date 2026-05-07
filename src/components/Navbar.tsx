@@ -33,8 +33,10 @@ export function Navbar() {
     <>
       <header 
         className={cn(
-          "fixed top-0 left-0 right-0 z-40 h-16 overflow-visible transition-all duration-300",
-          isScrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-white"
+          "fixed left-3 right-3 top-2 z-40 h-16 overflow-visible rounded-xl border transition-all duration-300 sm:left-6 sm:right-6 lg:left-10 lg:right-10 md:rounded-2xl",
+          isScrolled
+            ? "border-slate-200/90 bg-white/95 shadow-md backdrop-blur-sm"
+            : "border-slate-100/90 bg-white shadow-sm"
         )}
       >
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -90,7 +92,7 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 border-t border-slate-100 bg-white shadow-lg">
+          <div className="md:hidden absolute inset-x-0 top-full z-30 rounded-b-xl border-x border-b border-slate-100 bg-white shadow-lg">
             <nav className="flex flex-col space-y-1 px-4 py-6">
               {navLinks.map((link) => (
                 <Link
