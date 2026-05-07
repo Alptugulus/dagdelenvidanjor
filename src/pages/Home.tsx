@@ -48,7 +48,7 @@ export function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <div className="w-full pt-2 pb-16 flex justify-center">
+      <div className="w-full pt-8 pb-16 sm:pt-10 md:pt-14 lg:pt-16 flex justify-center">
         <section className="relative bg-slate-900 overflow-hidden rounded-[2.5rem] shadow-2xl w-11/12 lg:w-5/6 max-w-[1600px] min-h-[560px] lg:min-h-[680px]">
           {sliderImages.map((image, index) => (
             <div
