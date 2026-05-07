@@ -63,10 +63,14 @@ export function BlogPost() {
         </div>
 
         <div className="aspect-[21/9] w-full rounded-3xl overflow-hidden mb-12 shadow-md">
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="w-full h-full object-cover"
+          <img
+            src={post.image}
+            alt={post.title}
+            width={1200}
+            height={514}
+            className="h-full w-full object-cover"
+            decoding="async"
+            fetchPriority="high"
           />
         </div>
 

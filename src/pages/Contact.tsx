@@ -71,10 +71,12 @@ export function Contact() {
                 <h3 className="text-2xl font-semibold text-slate-900 mb-4">Hizmet Bölgemiz</h3>
                 <p className="text-slate-600 mb-6">İstanbul Avrupa Yakası'nın tüm ilçelerine vidanjör araçlarımızla hızlı şekilde ulaşmaktayız.</p>
               </div>
-              <div className="flex-1 bg-slate-200 relative min-h-[300px]">
-                {/* Simulated Map */}
-                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504222490345-c075b6008014?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center brightness-50"></div>
-                 <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40">
+              <div className="relative min-h-[300px] flex-1 overflow-hidden bg-slate-200">
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-slate-400 via-slate-600 to-slate-800"
+                  aria-hidden
+                />
+                 <div className="absolute inset-0 flex items-center justify-center bg-slate-900/35">
                     <div className="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
                       <div className="bg-red-100 p-2 rounded-lg">
                         <MapPin className="h-6 w-6 text-red-600" />

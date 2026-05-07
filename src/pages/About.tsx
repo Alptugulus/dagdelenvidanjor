@@ -35,28 +35,34 @@ export function About() {
 
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="md:w-1/2">
-            <div className="relative rounded-3xl shadow-lg w-full h-[400px] overflow-hidden">
-              {aboutImages.map((image, index) => (
-                <div
-                  key={image}
-                  className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                  style={{
-                    backgroundImage: `url('${image}')`,
-                    opacity: activeImage === index ? 1 : 0,
-                  }}
+            <div className="relative h-[400px] w-full overflow-hidden rounded-3xl shadow-lg">
+              <div className="absolute inset-0" aria-hidden>
+                <img
+                  src={aboutImages[activeImage]}
+                  alt=""
+                  width={900}
+                  height={600}
+                  className="h-full w-full object-cover"
+                  loading={activeImage === 0 ? "eager" : "lazy"}
+                  decoding="async"
                 />
-              ))}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+              </div>
+              <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-1" role="group" aria-label="Hakkımızda görselleri">
                 {aboutImages.map((image, index) => (
                   <button
                     key={`${image}-about-dot`}
                     type="button"
                     onClick={() => setActiveImage(index)}
-                    className={`h-2.5 w-8 rounded-full transition-colors ${
-                      activeImage === index ? "bg-red-500" : "bg-white/60"
-                    }`}
-                    aria-label={`Hakkımızda görsel ${index + 1}`}
-                  />
+                    className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                    aria-label={`Görsel ${index + 1} / ${aboutImages.length}`}
+                    aria-current={activeImage === index ? "true" : undefined}
+                  >
+                    <span
+                      className={`block h-2.5 w-8 rounded-full transition-colors ${
+                        activeImage === index ? "bg-red-500" : "bg-white/60"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>

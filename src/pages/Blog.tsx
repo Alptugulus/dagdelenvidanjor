@@ -30,7 +30,15 @@ export function Blog() {
           {posts.map(post => (
              <article key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 transition-all hover:shadow-md flex flex-col">
                <div className="aspect-[16/9] w-full overflow-hidden">
-                 <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                 <img
+                   src={post.image}
+                   alt=""
+                   width={800}
+                   height={450}
+                   loading="lazy"
+                   decoding="async"
+                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                 />
                </div>
                <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center text-sm text-slate-500 mb-4 space-x-4">
