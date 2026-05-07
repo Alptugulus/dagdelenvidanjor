@@ -1,7 +1,16 @@
 import { Phone, MapPin, Clock } from "lucide-react";
 import { WhatsAppIcon } from "../components/icons";
+import { useSEO } from "../hooks/useSEO";
 
 export function Contact() {
+  useSEO({
+    title: "İletişim — 7/24 Hat ve WhatsApp",
+    description:
+      "Avrupa Yakası vidanjör, kanal ve tahliye için 7/24 telefon (+90 542 210 56 27) ve WhatsApp ile hemen iletişim.",
+    ogImage: "/logo-header.png",
+    breadcrumbs: [{ name: "İletişim", url: "/iletisim" }],
+  });
+
   return (
     <div className="py-20 min-h-[calc(100vh-80px)]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

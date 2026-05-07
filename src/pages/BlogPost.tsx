@@ -20,12 +20,13 @@ export function BlogPost() {
   const readingTime = Math.ceil(wordCount / 200) || 1;
 
   useSEO({
-    title: `${post.title} | Vidanjor Servis Blog`,
+    title: post.title,
     description: post.excerpt,
+    ogImage: post.image,
     breadcrumbs: [
       { name: "Blog", url: "/blog" },
-      { name: post.title, url: `/blog/${post.slug}` }
-    ]
+      { name: post.title, url: `/blog/${post.slug}` },
+    ],
   });
 
   return (

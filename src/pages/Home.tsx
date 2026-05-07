@@ -30,7 +30,9 @@ export function Home() {
 
   useSEO({
     title: "Avrupa Yakası 7/24 Vidanjör Hizmeti",
-    description: "İstanbul Avrupa Yakası genelinde 7/24 acil vidanjör, kanal açma, logar temizliği ve su tahliye hizmeti sunuyoruz.",
+    description:
+      "İstanbul Avrupa Yakası genelinde 7/24 acil vidanjör, kanal açma, logar temizliği ve su tahliye hizmeti sunuyoruz.",
+    ogImage: "/slider-1.png",
     faq: [
       {
         question: "Vidanjör ekibi ne kadar sürede gelir?",

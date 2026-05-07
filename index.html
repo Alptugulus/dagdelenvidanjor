@@ -1,13 +1,65 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vidanjor Servis</title>
+    <meta
+      name="description"
+      content="İstanbul Avrupa Yakasında 7/24 vidanjör, kanal ve gider açma, logar, fosseptik, yağmur suyu tahliyesi ve acil atık su hizmeti."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href="https://www.vidanjor.com/" />
+    <link rel="icon" href="/logo-header.png" type="image/png" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Dağdelen Vidanjör — Avrupa Yakası 7/24</title>
+
+    <!-- İlk yüklemede JS çalışmadan önce: Search Console uyumlu temel yapı -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://www.vidanjor.com/#localbusiness",
+            "name": "Dağdelen Vidanjör",
+            "alternateName": "Vidanjor Servis",
+            "url": "https://www.vidanjor.com/",
+            "telephone": "+90-542-210-5627",
+            "image": "https://www.vidanjor.com/logo-header.png",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "İstanbul",
+              "addressRegion": "İstanbul",
+              "addressCountry": "TR"
+            },
+            "areaServed": {
+              "@type": "AdministrativeArea",
+              "name": "İstanbul Avrupa Yakası"
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "00:00",
+              "closes": "23:59"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
