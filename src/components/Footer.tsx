@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, ChevronRight, MapPin } from "lucide-react";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
+import { PictureImg } from "./PictureImg";
 
 export function Footer() {
   return (
@@ -15,15 +16,16 @@ export function Footer() {
           
           <div className="md:col-span-4 lg:col-span-3">
             <Link to="/" className="mb-6 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-md">
-              <div className="relative w-full max-w-[340px] sm:max-w-[400px] aspect-[937/242]">
-                <img
+              <div className="relative aspect-[937/242] w-full max-w-[340px] sm:max-w-[400px]">
+                <PictureImg
                   src="/logo-footer.png"
                   alt="Dağdelen Vidanjör Logo"
-                  className="absolute inset-0 h-full w-full object-contain object-left"
+                  pictureClassName="absolute inset-0 block h-full w-full"
                   width={937}
                   height={242}
                   decoding="async"
                   loading="lazy"
+                  className="h-full w-full object-contain object-left"
                 />
               </div>
             </Link>

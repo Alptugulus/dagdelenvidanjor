@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CTASection } from "../components/CTASection";
+import { PictureImg } from "../components/PictureImg";
 import { useSEO } from "../hooks/useSEO";
 import { posts } from "../data/posts";
 
@@ -29,14 +30,15 @@ export function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map(post => (
              <article key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 transition-all hover:shadow-md flex flex-col">
-               <div className="aspect-[16/9] w-full overflow-hidden">
-                 <img
+               <div className="relative aspect-[16/9] w-full overflow-hidden">
+                 <PictureImg
                    src={post.image}
-                   alt=""
+                   alt={post.title}
                    width={800}
                    height={450}
                    loading="lazy"
                    decoding="async"
+                   pictureClassName="absolute inset-0 block h-full w-full"
                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                  />
                </div>

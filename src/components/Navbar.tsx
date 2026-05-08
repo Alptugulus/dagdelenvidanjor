@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { cn } from "../lib/utils";
+import { PictureImg } from "./PictureImg";
 
 /** Global header: viewport üstüne yapışık, tam genişlik; iç boşluklar padding ile */
 const HEADER_NAV_HEIGHT = "h-16";
@@ -54,14 +55,15 @@ export function Navbar() {
             className="flex min-w-0 shrink items-center overflow-visible py-1"
             aria-label="Anasayfa — Dağdelen Vidanjör"
           >
-            <img
+            <PictureImg
               src="/logo-header.png"
               alt="Dağdelen Vidanjör Logo"
-              className="h-9 max-h-[calc(100%-0.375rem)] w-auto max-w-[min(75vw,280px)] object-contain object-left sm:h-10 sm:max-w-[min(82vw,320px)] md:h-11 md:max-w-[380px] lg:h-11 lg:max-w-[min(420px,calc(100vw-28rem))]"
+              pictureClassName="flex h-full min-w-0 shrink items-center"
               width={937}
               height={242}
               loading="eager"
               decoding="async"
+              className="h-9 max-h-[calc(100%-0.375rem)] w-auto max-w-[min(75vw,280px)] object-contain object-left sm:h-10 sm:max-w-[min(82vw,320px)] md:h-11 md:max-w-[380px] lg:h-11 lg:max-w-[min(420px,calc(100vw-28rem))]"
             />
           </Link>
 

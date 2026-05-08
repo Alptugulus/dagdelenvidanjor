@@ -3,6 +3,7 @@ import Markdown from "react-markdown";
 import { Calendar, User, ArrowLeft, Clock } from "lucide-react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CTASection } from "../components/CTASection";
+import { PictureImg } from "../components/PictureImg";
 import { useSEO } from "../hooks/useSEO";
 import { posts } from "../data/posts";
 
@@ -62,12 +63,13 @@ export function BlogPost() {
           </div>
         </div>
 
-        <div className="aspect-[21/9] w-full rounded-3xl overflow-hidden mb-12 shadow-md">
-          <img
+        <div className="relative aspect-[21/9] mb-12 w-full overflow-hidden rounded-3xl shadow-md">
+          <PictureImg
             src={post.image}
             alt={post.title}
             width={1200}
             height={514}
+            pictureClassName="absolute inset-0 block h-full w-full"
             className="h-full w-full object-cover"
             decoding="async"
             fetchPriority="high"

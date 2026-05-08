@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { PictureImg } from "../components/PictureImg";
 import { useSEO } from "../hooks/useSEO";
 
 export function About() {
@@ -37,7 +38,7 @@ export function About() {
           <div className="md:w-1/2">
             <div className="relative h-[400px] w-full overflow-hidden rounded-3xl shadow-lg">
               <div className="absolute inset-0" aria-hidden>
-                <img
+                <PictureImg
                   src={aboutImages[activeImage]}
                   alt=""
                   width={900}

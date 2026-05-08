@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "images": "node scripts/optimize-images.mjs",
     "sitemap": "tsx scripts/gen-sitemap.ts",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
@@ -30,7 +31,7 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
-    "tailwindcss": "^4.1.14",
+    "sharp": "^0.34.5",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2"
   }

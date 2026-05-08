@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_ORIGIN } from "../config/site";
+import { webpFromPng } from "../lib/image";
 
 interface SEOProps {
   title: string;
@@ -37,12 +38,13 @@ function setLink(rel: string, href: string) {
 }
 
 function absoluteOgImage(src?: string): string {
-  const raw = src?.trim() || DEFAULT_OG_IMAGE;
+  let raw = src?.trim() || DEFAULT_OG_IMAGE;
   if (raw.startsWith("http://") || raw.startsWith("https://")) {
     return raw;
   }
-  const path = raw.startsWith("/") ? raw : `/${raw}`;
-  return `${SITE_ORIGIN}${path}`;
+  const pathOnly = raw.startsWith("/") ? raw : `/${raw}`;
+  const forOg = /\.png$/i.test(pathOnly) ? webpFromPng(pathOnly) : pathOnly;
+  return `${SITE_ORIGIN}${forOg}`;
 }
 
 export function useSEO({

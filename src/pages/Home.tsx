@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle2, Navigation } from "lucide-react";
+import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle2, Navigation, ChevronRight } from "lucide-react";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
 import { WhatsAppIcon } from "../components/icons";
 import { useSEO } from "../hooks/useSEO";
 import { BrandTicker } from "../components/BrandTicker";
+import { PictureImg } from "../components/PictureImg";
 
 export function Home() {
   const sliderImages = ["/slider-1.png", "/slider-2.png", "/about-3.png"];
@@ -32,7 +33,7 @@ export function Home() {
     title: "Avrupa Yakası 7/24 Vidanjör Hizmeti",
     description:
       "İstanbul Avrupa Yakası genelinde 7/24 acil vidanjör, kanal açma, logar temizliği ve su tahliye hizmeti sunuyoruz.",
-    ogImage: "/slider-1.png",
+    ogImage: "/slider-1.webp",
     faq: [
       {
         question: "Vidanjör ekibi ne kadar sürede gelir?",
@@ -54,7 +55,7 @@ export function Home() {
           aria-labelledby="hero-heading"
         >
           <div className="absolute inset-0" aria-hidden>
-            <img
+            <PictureImg
               src={sliderImages[activeSlide]}
               alt=""
               width={1920}
@@ -149,7 +150,7 @@ export function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
           <div className="relative h-[420px] w-full overflow-hidden rounded-3xl shadow-2xl md:h-[500px] lg:w-1/2">
             <div className="absolute inset-0" aria-hidden>
-              <img
+              <PictureImg
                 src={serviceSliderImages[activeServiceSlide]}
                 alt=""
                 width={1200}
@@ -236,24 +237,5 @@ export function Home() {
 
       <BrandTicker />
     </div>
-  );
-}
-
-function ChevronRight(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
   );
 }
