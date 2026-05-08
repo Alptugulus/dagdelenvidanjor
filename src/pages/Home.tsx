@@ -8,8 +8,8 @@ import { BrandTicker } from "../components/BrandTicker";
 import { PictureImg } from "../components/PictureImg";
 
 export function Home() {
-  const sliderImages = ["/slider-1.png", "/slider-2.png", "/about-3.png"];
-  const serviceSliderImages = ["/about-1.png", "/about-2.png", "/about-3.png"];
+  const sliderImages = ["/slider-1.png", "/slider-2.png", "/about-4.png", "/about-5.png"];
+  const serviceSliderImages = ["/about-1.png", "/about-2.png", "/about-3.png", "/about-6.png"];
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
 
