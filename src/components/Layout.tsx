@@ -1,9 +1,30 @@
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { MobileBottomAction } from "./MobileBottomAction";
 
 export function Layout() {
+  const location = useLocation();
+  const isFirstPath = useRef(true);
+
+  useEffect(() => {
+    if (!window.gtag) return;
+
+    const path = location.pathname + location.search;
+
+    // İlk sayfa görüntüsü index.html içindeki gtag("config") ile gider.
+    if (isFirstPath.current) {
+      isFirstPath.current = false;
+      return;
+    }
+
+    window.gtag("event", "page_view", {
+      page_path: path,
+      page_title: document.title,
+    });
+  }, [location]);
+
   return (
     <div className="flex min-h-screen flex-col font-sans">
       <ScrollRestoration />
@@ -21,4 +42,11 @@ export function Layout() {
       <MobileBottomAction />
     </div>
   );
+}
+
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
 }
