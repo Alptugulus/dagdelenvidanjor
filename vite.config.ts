@@ -29,5 +29,14 @@ export default defineConfig({
   },
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',
+    headers: {
+      // Yerelde eski JS/CSS kalmasın; "değişti ama görünmüyor" şikayetini azaltır.
+      'Cache-Control': 'no-store',
+    },
+    /** İndirmeler klasöründe watcher bazen güncellemez — VITE_POLL=1 ile: `VITE_POLL=1 npm run dev` */
+    watch:
+      process.env.VITE_POLL === '1'
+        ? { usePolling: true, interval: 350 }
+        : undefined,
   },
 });

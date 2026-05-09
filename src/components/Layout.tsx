@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
-import { Navbar } from "./Navbar";
+import { Navbar, HEADER_MAIN_PADDING_TOP } from "./Navbar";
 import { Footer } from "./Footer";
 import { MobileBottomAction } from "./MobileBottomAction";
 
@@ -35,7 +35,7 @@ export function Layout() {
         İçeriğe geç
       </a>
       <Navbar />
-      <main id="main-content" className="flex-1 pt-16" tabIndex={-1}>
+      <main id="main-content" className={`flex-1 ${HEADER_MAIN_PADDING_TOP}`} tabIndex={-1}>
         <Outlet />
       </main>
       <Footer />

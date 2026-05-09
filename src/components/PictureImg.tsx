@@ -11,12 +11,12 @@ type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
 /**
  * WebP + PNG geri dönüşü: LCP ve bant genişliği için WebP öncelikli.
  */
-export function PictureImg({ src, alt = "", pictureClassName, className, ...imgProps }: Props) {
+export function PictureImg({ src, alt = "", pictureClassName, className, style, ...imgProps }: Props) {
   const webp = webpFromPng(src);
   return (
     <picture className={pictureClassName ?? "block h-full w-full"}>
       <source type="image/webp" srcSet={webp} />
-      <img src={src} alt={alt} className={className} {...imgProps} />
+      <img src={src} alt={alt} {...imgProps} className={className} style={style} />
     </picture>
   );
 }

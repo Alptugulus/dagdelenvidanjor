@@ -49,7 +49,7 @@ export function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <div className="w-full pt-8 pb-16 sm:pt-10 md:pt-14 lg:pt-16 flex justify-center">
+      <div className="w-full pt-3 pb-16 sm:pt-4 md:pt-6 lg:pt-8 flex justify-center">
         <section
           className="relative min-h-[560px] w-11/12 max-w-[1600px] overflow-hidden rounded-[2.5rem] bg-slate-900 shadow-2xl lg:min-h-[680px] lg:w-5/6"
           aria-labelledby="hero-heading"

@@ -1,6 +1,19 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Navbar logo — ID ile; Tailwind / eski sınıflar üstüne (tarayıcı önbelleği debug: /build-id.txt) */
+#site-header-logo {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+  max-width: min(94vw, 640px) !important;
+  /* scale yok; h-16 şeritte hafif üst-alt taşma */
+  height: clamp(60px, 14.5vmin, 96px) !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+}
+
 @theme {
   --color-red-50: #fff0f0;
   --color-red-100: #ffe4e4;

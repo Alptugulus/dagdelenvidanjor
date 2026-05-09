@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { cn } from "../lib/utils";
-import { PictureImg } from "./PictureImg";
 
-/** Global header: viewport üstüne yapışık, tam genişlik; iç boşluklar padding ile */
-const HEADER_NAV_HEIGHT = "h-16";
+/** Global header yüksekliği — Layout’taki ana içerik üst dolgusuyla aynı rem değerinde olmalı. */
+export const HEADER_NAV_HEIGHT = "h-16";
+/** Büyük logo taşır; içerik üstten logo altına kadar boşluk (≈ slider üst kenarı için yeterli) */
+export const HEADER_MAIN_PADDING_TOP = "pt-24";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,38 +37,47 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-40 w-full border-b transition-colors duration-200",
+          "fixed inset-x-0 top-0 z-40 w-full overflow-visible border-b transition-colors duration-200",
           HEADER_NAV_HEIGHT,
           isScrolled
             ? "border-slate-200/90 bg-white/95 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
             : "border-slate-100 bg-white"
         )}
       >
-        <div className="relative h-full">
+        <div className="relative h-full overflow-visible">
         <div
           className={cn(
-            "mx-auto flex h-full max-w-7xl items-center justify-between gap-4",
-            "px-4 py-2.5 sm:gap-6 sm:px-6 sm:py-3 lg:px-8"
+            "relative mx-auto flex h-full max-w-7xl items-center justify-between gap-3 overflow-visible",
+            "px-4 sm:gap-5 sm:px-6 lg:px-8"
           )}
         >
           <Link
             to="/"
-            className="flex min-w-0 shrink items-center overflow-visible py-1"
-            aria-label="Anasayfa — Dağdelen Vidanjör"
+            className={cn(
+              "pointer-events-auto absolute left-4 top-1/2 z-[45] flex w-max max-w-none -translate-y-1/2 items-center overflow-visible sm:left-6 lg:left-8",
+              "outline-offset-4"
+            )}
+            aria-label="Anasayfa — Demir Vidanjör"
           >
-            <PictureImg
-              src="/logo-header.png"
-              alt="Dağdelen Vidanjör Logo"
-              pictureClassName="flex h-full min-w-0 shrink items-center"
-              width={937}
-              height={242}
-              loading="eager"
-              decoding="async"
-              className="h-9 max-h-[calc(100%-0.375rem)] w-auto max-w-[min(75vw,280px)] object-contain object-left sm:h-10 sm:max-w-[min(82vw,320px)] md:h-11 md:max-w-[380px] lg:h-11 lg:max-w-[min(420px,calc(100vw-28rem))]"
-            />
+            <picture className="m-0 block max-w-none overflow-visible p-0 leading-none">
+              <source srcSet="/logo-header.webp?v=10" type="image/webp" />
+              <img
+                id="site-header-logo"
+                src="/logo-header.png?v=10"
+                alt="Demir Vidanjör Logo"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
           </Link>
 
-          <nav className="hidden shrink-0 items-center gap-x-7 md:flex" aria-label="Ana navigasyon">
+          <div
+            className="pointer-events-none w-[clamp(160px, 50vw, 300px)] shrink-0 md:w-[22rem] lg:w-[28rem]"
+            aria-hidden
+          />
+
+          <nav className="hidden shrink-0 items-center gap-x-7 md:flex md:justify-end" aria-label="Ana navigasyon">
             {navLinks.map((link) => (
               <Link
                 key={link.path}

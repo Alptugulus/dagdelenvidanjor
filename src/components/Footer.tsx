@@ -11,18 +11,18 @@ export function Footer() {
         <div className="absolute -top-[20%] left-1/2 w-[800px] h-[800px] -translate-x-1/2 rounded-full bg-red-600/5 blur-[120px]"></div>
       </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-4 pb-0 sm:px-6 sm:pt-6 lg:px-8 lg:pt-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
           
           <div className="md:col-span-4 lg:col-span-3">
             <Link to="/" className="mb-6 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-md">
-              <div className="relative aspect-[937/242] w-full max-w-[340px] sm:max-w-[400px]">
+              <div className="relative aspect-[1024/682] w-full max-w-[460px] sm:max-w-[560px]">
                 <PictureImg
                   src="/logo-footer.png"
-                  alt="Dağdelen Vidanjör Logo"
+                  alt="Demir Vidanjör Logo"
                   pictureClassName="absolute inset-0 block h-full w-full"
-                  width={937}
-                  height={242}
+                  width={1024}
+                  height={682}
                   decoding="async"
                   loading="lazy"
                   className="h-full w-full object-contain object-left"
@@ -75,9 +75,9 @@ export function Footer() {
         </div>
         
         {/* Credits & Copyright Area */}
-        <div className="border-t border-slate-800/60 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm relative z-10">
+        <div className="border-t border-slate-800/60 mt-8 pt-4 pb-2 flex flex-col items-center justify-between gap-2 text-sm md:flex-row md:gap-4 relative z-10">
           <p className="text-slate-400/80 text-center md:text-left">
-            &copy; 2026 <span className="text-white/80">Vidanjor Servis</span>. Tüm Hakları Saklıdır.
+            &copy; 2026 <span className="text-white/80">Demir Vidanjör</span>. Tüm Hakları Saklıdır.
           </p>
           
           <p className="text-slate-400/80 text-center md:text-right">
