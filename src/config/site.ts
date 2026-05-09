@@ -1,5 +1,5 @@
 /** Canlı domain — OG, canonical, şema ve Site Haritası için */
-export const SITE_ORIGIN = "https://www.vidanjor.com";
+export const SITE_ORIGIN = "https://www.demirvidanjor.com";
 
 export const SITE_NAME = "Demir Vidanjör";
 

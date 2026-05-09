@@ -3,10 +3,10 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { avrupaYakasiIlceleri, generateSlug } from "../src/data/locations";
 import { posts } from "../src/data/posts";
+import { SITE_ORIGIN } from "../src/config/site";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const SITE = "https://www.vidanjor.com";
 const isoDate = () => new Date().toISOString().split("T")[0];
 
 type Entry = { path: string; changefreq: string; priority: string };
@@ -39,7 +39,7 @@ const body = urls
   .map(
     (u) =>
       `  <url>
-    <loc>${SITE}${u.path}</loc>
+    <loc>${SITE_ORIGIN}${u.path}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
