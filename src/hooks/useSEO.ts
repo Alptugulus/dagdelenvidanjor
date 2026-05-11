@@ -47,6 +47,11 @@ function absoluteOgImage(src?: string): string {
   return `${SITE_ORIGIN}${forOg}`;
 }
 
+function normalizeCanonicalPath(pathname: string): string {
+  if (!pathname || pathname === "/") return "/";
+  return pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+}
+
 export function useSEO({
   title,
   fullTitle,
@@ -64,8 +69,10 @@ export function useSEO({
 
     setMeta("name", "description", description);
 
-    const path = `${location.pathname}${location.search}`;
-    const canonicalUrl = `${SITE_ORIGIN}${path === "" ? "/" : path}`;
+    // Canonical URL'de query string kullanmayız; UTM/gclid gibi parametreler
+    // aynı içeriği farklı URL gibi gösterebilir.
+    const canonicalPath = normalizeCanonicalPath(location.pathname);
+    const canonicalUrl = `${SITE_ORIGIN}${canonicalPath}`;
     setLink("canonical", canonicalUrl);
 
     // Open Graph
