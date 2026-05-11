@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, ChevronRight, MapPin } from "lucide-react";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
+import { SITE_GOOGLE_MAPS_URL, SITE_PHONE_DISPLAY, SITE_PHONE_TEL_HREF } from "../config/site";
 import { PictureImg } from "./PictureImg";
 
 export function Footer() {
@@ -33,16 +34,26 @@ export function Footer() {
               Avrupa Yakası'nda 7/24 hızlı, güvenilir ve profesyonel vidanjör hizmeti. Tıkanıklık ve tahliye ihtiyaçlarınızda bize ulaşın.
             </p>
             <div className="flex flex-col space-y-4">
-              <a href="tel:+905422105627" className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors group p-3 bg-slate-900 rounded-xl border border-slate-800 hover:border-red-500/30">
+              <a href={SITE_PHONE_TEL_HREF} className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors group p-3 bg-slate-900 rounded-xl border border-slate-800 hover:border-red-500/30">
                 <div className="bg-red-600/10 p-2 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors">
                   <Phone className="h-4 w-4 text-red-500 group-hover:text-white" />
                 </div>
-                <span className="font-semibold tracking-wide">+90 542 210 56 27</span>
+                <span className="font-semibold tracking-wide">{SITE_PHONE_DISPLAY}</span>
               </a>
-              <div className="flex items-center space-x-3 text-slate-400 p-3">
-                <MapPin className="h-4 w-4" />
-                <span className="text-sm">Avrupa Yakası, İstanbul</span>
-              </div>
+              <a
+                href={SITE_GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 rounded-xl border border-slate-800 bg-slate-900 p-3 text-slate-400 transition-colors hover:border-red-500/30 hover:text-white"
+              >
+                <MapPin className="h-4 w-4 shrink-0 text-red-500/80" aria-hidden />
+                <span className="text-sm leading-snug">
+                  Avrupa Yakası, İstanbul
+                  <span className="mt-0.5 block text-xs text-slate-500 hover:text-slate-300">
+                    Google Haritalar&apos;da aç
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
           

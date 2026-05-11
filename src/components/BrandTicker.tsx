@@ -1,6 +1,8 @@
 const services = [
   "Kanal Açma",
   "Vidanjör Çekimi",
+  "Mini Vidanjör",
+  "Kombine Vidanjör",
   "Logar Temizliği",
   "Rögar Açma",
   "Fosseptik Çekimi",

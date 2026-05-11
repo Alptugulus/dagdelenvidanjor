@@ -2,10 +2,12 @@ import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   Camera,
+  CarFront,
   CloudRain,
   Container,
   Drill,
   Droplets,
+  Layers,
   LocateFixed,
   MapPinned,
   Pipette,
@@ -16,41 +18,62 @@ import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CTASection } from "../components/CTASection";
 import { WhatsAppIcon } from "../components/icons";
+import { PictureImg } from "../components/PictureImg";
+import { SERVICE_CARD_IMAGES } from "../data/serviceCardImages";
+import { SITE_PHONE_E164 } from "../config/site";
 import { useSEO } from "../hooks/useSEO";
-
-const WHATSAPP = "905422105627";
 
 function waHref(serviceTitle: string) {
   const text = `Merhaba, "${serviceTitle}" hizmeti hakkında hemen bilgi almak istiyorum.`;
-  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${SITE_PHONE_E164}?text=${encodeURIComponent(text)}`;
 }
 
 type ServiceCard = {
   title: string;
   Icon: LucideIcon;
+  /** `public/services/` — bkz. `src/data/serviceCardImages.ts` */
+  image: string;
   description: ReactNode;
 };
 
 function ServiceCardBlock({ item }: { item: ServiceCard }) {
   const Icon = item.Icon;
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md md:p-8">
-      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-red-50 to-slate-50 ring-1 ring-red-100">
-        <Icon className="h-7 w-7 text-red-600" aria-hidden />
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+      <div className="relative aspect-[16/10] w-full shrink-0 bg-slate-200">
+        <PictureImg
+          src={item.image}
+          alt={item.title}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover"
+          pictureClassName="block h-full w-full"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/25 to-transparent"
+          aria-hidden
+        />
       </div>
-      <h3 className="mb-3 text-lg font-semibold text-slate-900 md:text-xl">{item.title}</h3>
-      <div className="mb-6 flex-1 text-sm leading-relaxed text-slate-600 md:text-[15px]">
-        {item.description}
+      <div className="flex flex-1 flex-col p-6 md:p-8">
+        <div className="mb-5 flex items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-red-50 to-slate-50 ring-1 ring-red-100 md:h-14 md:w-14">
+            <Icon className="h-6 w-6 text-red-600 md:h-7 md:w-7" aria-hidden />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-900 md:text-xl">{item.title}</h3>
+        </div>
+        <div className="mb-6 flex-1 text-sm leading-relaxed text-slate-600 md:text-[15px]">
+          {item.description}
+        </div>
+        <a
+          href={waHref(item.title)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
+        >
+          <WhatsAppIcon className="h-5 w-5" />
+          Hemen Bilgi Al
+        </a>
       </div>
-      <a
-        href={waHref(item.title)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
-      >
-        <WhatsAppIcon className="h-5 w-5" />
-        Hemen Bilgi Al
-      </a>
     </article>
   );
 }
@@ -59,6 +82,7 @@ const category1Services: ServiceCard[] = [
   {
     title: "Kameralı Görüntüleme",
     Icon: Camera,
+    image: SERVICE_CARD_IMAGES.kameraliGoruntuleme,
     description: (
       <>
         Pimaş ve ana hat giderlerinin içini yüksek çözünürlüklü kameralar ile izleme ve raporlama.{" "}
@@ -71,6 +95,7 @@ const category1Services: ServiceCard[] = [
   {
     title: "Robotla Gider Açma",
     Icon: Drill,
+    image: SERVICE_CARD_IMAGES.robotlaGiderAcma,
     description: (
       <>
         Gelişmiş robotik cihazlarla pimaş, mutfak ve lavabo tıkanıklıklarını kırmadan açma.
@@ -82,6 +107,7 @@ const category1Services: ServiceCard[] = [
   {
     title: "Dedektörle Tespit",
     Icon: LocateFixed,
+    image: SERVICE_CARD_IMAGES.dedektorleTespit,
     description: (
       <>
         Kayıp logar kapaklarını ve hat üzerindeki çöküntüleri dedektör yardımıyla noktasal olarak
@@ -93,6 +119,7 @@ const category1Services: ServiceCard[] = [
   {
     title: "Altyapı Tesisat",
     Icon: Pipette,
+    image: SERVICE_CARD_IMAGES.altyapiTesisat,
     description: (
       <>
         Sıfırdan kanalizasyon döşeme, hat yenileme ve profesyonel altyapı onarım çalışmaları.{" "}
@@ -104,6 +131,7 @@ const category1Services: ServiceCard[] = [
   {
     title: "Logar Yapma & Bulma",
     Icon: MapPinned,
+    image: SERVICE_CARD_IMAGES.logarYapmaBulma,
     description: (
       <>
         Yeni logar inşası ve yeri bilinmeyen körelmiş logarların profesyonel tespiti.{" "}
@@ -119,17 +147,45 @@ const category2Services: ServiceCard[] = [
   {
     title: "Vidanjör Hizmetleri",
     Icon: Truck,
+    image: SERVICE_CARD_IMAGES.vidanjorHizmetleri,
     description: (
       <>
-        Mini, Orta ve Büyük boy araç parkuru ile her türlü atık su tahliyesi. Geniş filo ve{" "}
+        Orta ve büyük boy araçlarla her türlü atık su tahliyesi. Geniş filo ve{" "}
         <span className="font-semibold text-red-600">20 Yıllık Tecrübe</span> ile sahada hızlı ve
         güvenli operasyon.
       </>
     ),
   },
   {
+    title: "Mini Vidanjör",
+    Icon: CarFront,
+    image: SERVICE_CARD_IMAGES.miniVidanjor,
+    description: (
+      <>
+        Dar sokak, site içi ve düşük tavanlı alanlarda manevra kabiliyeti yüksek kompakt araçlarla
+        tahliye. Yoğun yerleşimde hızlı erişim;{" "}
+        <span className="font-semibold text-red-600">20 Yıllık Tecrübe</span> ile güvenli saha
+        yönetimi.
+      </>
+    ),
+  },
+  {
+    title: "Kombine Vidanjör",
+    Icon: Layers,
+    image: SERVICE_CARD_IMAGES.kombineVidanjor,
+    description: (
+      <>
+        Vakumlama ve yüksek basınçlı yıkama/jet kapasitesini tek araçta birleştiren çözüm. Zorlu
+        hatlarda etkili müdahale;{" "}
+        <span className="font-semibold text-red-600">20 Yıllık Tecrübe</span> ile doğru ekipman
+        seçimi.
+      </>
+    ),
+  },
+  {
     title: "Vidanjör Kuka",
     Icon: Droplets,
+    image: SERVICE_CARD_IMAGES.vidanjorKuka,
     description: (
       <>
         Yüksek basınçlı su jeti ile kanalizasyon hatlarını temizleme ve açma. Yoğun kir ve
@@ -141,6 +197,7 @@ const category2Services: ServiceCard[] = [
   {
     title: "Foseptik Çekimi",
     Icon: Container,
+    image: SERVICE_CARD_IMAGES.foseptikCekimi,
     description: (
       <>
         Foseptik kuyularının boşaltılması, temizlenmesi ve hijyenik bakımı. Periyodik planlama ve
@@ -152,6 +209,7 @@ const category2Services: ServiceCard[] = [
   {
     title: "Yağ Tutucu Temizliği",
     Icon: Waves,
+    image: SERVICE_CARD_IMAGES.yagTutucuTemizligi,
     description: (
       <>
         Restoran ve sanayi tipi yağ ayırıcıların periyodik temizliği ve bakımı. Yasal uyum ve
@@ -163,6 +221,7 @@ const category2Services: ServiceCard[] = [
   {
     title: "Atık Su & Yağmur Suyu",
     Icon: CloudRain,
+    image: SERVICE_CARD_IMAGES.atiksuYagmursuyu,
     description: (
       <>
         Su baskınları sonrası hızlı tahliye ve yağmur suyu kanallarının temizliği. Acil müdahale ve
@@ -177,7 +236,7 @@ export function Services() {
   useSEO({
     title: "Hizmetlerimiz - Teknolojik Altyapı & Vidanjör",
     description:
-      "Kameralı görüntüleme, robotla gider açma, dedektörle tespit, vidanjör ve foseptik çekimi, yağ tutucu ve tahliye hizmetleri. Kırmadan tespit ve 20 yıllık tecrübe.",
+      "Kameralı görüntüleme, robotla gider açma, dedektörle tespit, mini ve kombine vidanjör, vidanjör ve foseptik çekimi, yağ tutucu ve tahliye hizmetleri. Kırmadan tespit ve 20 yıllık tecrübe.",
     breadcrumbs: [{ name: "Hizmetlerimiz", url: "/hizmetlerimiz" }],
   });
 

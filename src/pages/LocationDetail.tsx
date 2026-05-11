@@ -1,6 +1,7 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { PhoneCall, MapPin, SearchCheck } from "lucide-react";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
+import { SITE_PHONE_TEL_HREF } from "../config/site";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { useSEO } from "../hooks/useSEO";
 import { FAQSection } from "../components/FAQSection";
@@ -55,8 +56,8 @@ export function LocationDetail() {
            <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10">
              {matchedIlce} ve çevresinde kanal tıkanıklığı, fosseptik çekimi veya su tahliyesi için 7/24 hizmet veriyoruz.
            </p>
-           <a 
-              href="tel:+905422105627" 
+           <a
+              href={SITE_PHONE_TEL_HREF}
               className="inline-flex items-center justify-center space-x-2 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 px-8 py-4 text-lg font-semibold text-white transition-all hover:-translate-y-1 hover:shadow-xl shadow-lg shadow-red-500/40 border-t border-red-400/30"
             >
               <PhoneCall className="h-6 w-6" />
