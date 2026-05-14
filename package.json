@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
+    "build:only": "vite build",
     "images": "node scripts/optimize-images.mjs",
     "sitemap": "tsx scripts/gen-sitemap.ts",
     "clean": "rm -rf dist",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
+    "puppeteer": "^24.43.1",
     "sharp": "^0.34.5",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2"
