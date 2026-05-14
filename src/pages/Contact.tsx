@@ -9,6 +9,7 @@ import {
   SITE_PHONE_TEL_HREF,
   SITE_WHATSAPP_URL,
 } from "../config/site";
+import { trackConversion } from "../lib/trackConversion";
 
 export function Contact() {
   useSEO({
@@ -41,7 +42,7 @@ export function Contact() {
                  <div>
                    <h3 className="text-xl font-semibold mb-1">Acil Hizmet Hattı</h3>
                    <p className="text-slate-300 mb-2">7/24 kesintisiz hizmet için bizi hemen arayın.</p>
-                   <a href={SITE_PHONE_TEL_HREF} className="text-2xl font-semibold text-red-400 hover:text-white transition-colors">
+                   <a href={SITE_PHONE_TEL_HREF} onClick={(e) => trackConversion(e, "phone")} className="text-2xl font-semibold text-red-400 hover:text-white transition-colors">
                      {SITE_PHONE_DISPLAY}
                    </a>
                  </div>
@@ -54,7 +55,7 @@ export function Contact() {
                  <div>
                    <h3 className="text-xl font-semibold mb-1">WhatsApp İletişim</h3>
                    <p className="text-slate-300 mb-2">Konumunuzu atın, en yakın ekibimizi yönlendirelim.</p>
-                   <a href={SITE_WHATSAPP_URL} target="_blank" rel="noreferrer" className="text-xl font-semibold text-green-400 hover:text-white transition-colors">
+                   <a href={SITE_WHATSAPP_URL} onClick={(e) => trackConversion(e, "whatsapp")} target="_blank" rel="noreferrer" className="text-xl font-semibold text-green-400 hover:text-white transition-colors">
                      WhatsApp'tan Yazın
                    </a>
                  </div>

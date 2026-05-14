@@ -256,8 +256,29 @@ export function Services() {
           </p>
         </div>
 
-        {/* Category 1 */}
+        {/* Vidanjör ve Tahliye Hizmetleri */}
         <section className="mb-20">
+          <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+            <h2 className="text-2xl font-bold text-slate-900 md:text-3xl">
+              Vidanjör ve Tahliye Hizmetleri
+            </h2>
+            <p className="mt-4 max-w-4xl text-slate-600">
+              Farklı kapasiteli araç filosu ve saha disiplini ile atık su, foseptik ve yağmur suyu
+              hatlarında profesyonel tahliye ve temizlik.{" "}
+              <span className="font-semibold text-red-600">20 Yıllık Tecrübe</span> ile tek noktadan
+              çözüm.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            {category2Services.map((item) => (
+              <ServiceCardBlock key={item.title} item={item} />
+            ))}
+          </div>
+        </section>
+
+        {/* Teknolojik Altyapı Çözümleri */}
+        <section className="mb-16">
           <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
             <h2 className="text-2xl font-bold text-slate-900 md:text-3xl">
               Teknolojik Altyapı Çözümleri
@@ -274,27 +295,6 @@ export function Services() {
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {category1Services.map((item) => (
-              <ServiceCardBlock key={item.title} item={item} />
-            ))}
-          </div>
-        </section>
-
-        {/* Category 2 */}
-        <section className="mb-16">
-          <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-            <h2 className="text-2xl font-bold text-slate-900 md:text-3xl">
-              Vidanjör ve Tahliye Hizmetleri
-            </h2>
-            <p className="mt-4 max-w-4xl text-slate-600">
-              Farklı kapasiteli araç filosu ve saha disiplini ile atık su, foseptik ve yağmur suyu
-              hatlarında profesyonel tahliye ve temizlik.{" "}
-              <span className="font-semibold text-red-600">20 Yıllık Tecrübe</span> ile tek noktadan
-              çözüm.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {category2Services.map((item) => (
               <ServiceCardBlock key={item.title} item={item} />
             ))}
           </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Phone, PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle2, Navigation, ChevronRight } from "lucide-react";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL_HREF, SITE_WHATSAPP_URL } from "../config/site";
+import { trackConversion } from "../lib/trackConversion";
 import { HERO_SLIDE_CONTENT } from "../data/heroSlideContent";
 import { HERO_SLIDER_IMAGES } from "../data/heroSliderImages";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
@@ -105,6 +106,7 @@ export function Home() {
 
           <a
             href={SITE_PHONE_TEL_HREF}
+            onClick={(e) => trackConversion(e, "phone")}
             className="absolute bottom-[4.5rem] right-6 z-[2] hidden items-center gap-2 rounded-full border border-slate-600/80 bg-slate-900/90 px-4 py-2.5 text-sm font-semibold text-slate-200 shadow-lg backdrop-blur-sm transition-colors hover:border-red-500/50 hover:text-white sm:flex md:bottom-[5.25rem] md:right-10"
           >
             <Phone className="h-4 w-4 shrink-0 text-red-500" aria-hidden />
@@ -125,6 +127,7 @@ export function Home() {
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-start">
                 <a
                   href={SITE_PHONE_TEL_HREF}
+                  onClick={(e) => trackConversion(e, "phone")}
                   className="flex items-center justify-center space-x-2 rounded-2xl border-t border-red-400/30 bg-gradient-to-r from-red-600 to-red-500 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-red-500/40 transition-all hover:-translate-y-1 hover:shadow-xl"
                 >
                   <PhoneCall className="h-5 w-5" aria-hidden />
@@ -134,6 +137,7 @@ export function Home() {
                   href={SITE_WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => trackConversion(e, "whatsapp")}
                   className="flex items-center justify-center space-x-2 rounded-2xl border-t border-green-400/30 bg-gradient-to-r from-emerald-500 to-green-500 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-green-500/30 transition-all hover:-translate-y-1 hover:shadow-xl"
                 >
                   <WhatsAppIcon className="h-5 w-5" aria-hidden />

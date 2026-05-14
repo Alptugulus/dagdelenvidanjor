@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Phone, ChevronRight, MapPin } from "lucide-react";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
 import { SITE_GOOGLE_MAPS_URL, SITE_PHONE_DISPLAY, SITE_PHONE_TEL_HREF } from "../config/site";
+import { trackConversion } from "../lib/trackConversion";
 import { PictureImg } from "./PictureImg";
 
 export function Footer() {
@@ -34,7 +35,7 @@ export function Footer() {
               Avrupa Yakası'nda 7/24 hızlı, güvenilir ve profesyonel vidanjör hizmeti. Tıkanıklık ve tahliye ihtiyaçlarınızda bize ulaşın.
             </p>
             <div className="flex flex-col space-y-4">
-              <a href={SITE_PHONE_TEL_HREF} className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors group p-3 bg-slate-900 rounded-xl border border-slate-800 hover:border-red-500/30">
+              <a href={SITE_PHONE_TEL_HREF} onClick={(e) => trackConversion(e, "phone")} className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors group p-3 bg-slate-900 rounded-xl border border-slate-800 hover:border-red-500/30">
                 <div className="bg-red-600/10 p-2 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors">
                   <Phone className="h-4 w-4 text-red-500 group-hover:text-white" />
                 </div>

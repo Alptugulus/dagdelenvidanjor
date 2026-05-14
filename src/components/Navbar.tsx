@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { SITE_PHONE_TEL_HREF } from "../config/site";
+import { trackConversion } from "../lib/trackConversion";
 import { cn } from "../lib/utils";
 
 /** Global header yüksekliği — Layout’taki ana içerik üst dolgusuyla aynı rem değerinde olmalı. */
@@ -96,6 +97,7 @@ export function Navbar() {
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <a
               href={SITE_PHONE_TEL_HREF}
+              onClick={(e) => trackConversion(e, "phone")}
               className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-red-500/25 transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transform-none md:inline-flex md:px-6"
             >
               <PhoneCall className="h-4 w-4" aria-hidden />

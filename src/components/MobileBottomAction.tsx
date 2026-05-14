@@ -1,5 +1,6 @@
 import { PhoneCall } from "lucide-react";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_E164, SITE_PHONE_TEL_HREF } from "../config/site";
+import { trackConversion } from "../lib/trackConversion";
 import { WhatsAppIcon } from "./icons";
 
 export function MobileBottomAction() {
@@ -10,6 +11,7 @@ export function MobileBottomAction() {
     >
       <a
         href={SITE_PHONE_TEL_HREF}
+        onClick={(e) => trackConversion(e, "phone")}
         aria-label={`Hemen ara: ${SITE_PHONE_DISPLAY}`}
         className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-red-400/30 bg-gradient-to-r from-red-600 to-red-500 py-4 text-white shadow-lg shadow-red-500/40 transition-transform active:scale-95"
       >
@@ -20,6 +22,7 @@ export function MobileBottomAction() {
         href={`https://wa.me/${SITE_PHONE_E164}?text=Merhaba,%20acil%20vidanjör%20hizmetine%20ihtiyacım%20var.`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={(e) => trackConversion(e, "whatsapp")}
         aria-label="WhatsApp ile acil vidanjör iletişimi"
         className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-green-400/30 bg-gradient-to-r from-emerald-500 to-green-500 py-4 text-white shadow-lg shadow-green-500/40 transition-transform active:scale-95"
       >

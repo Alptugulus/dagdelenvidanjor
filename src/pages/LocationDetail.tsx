@@ -2,6 +2,7 @@ import { useParams, Navigate, Link } from "react-router-dom";
 import { PhoneCall, MapPin, SearchCheck } from "lucide-react";
 import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
 import { SITE_PHONE_TEL_HREF } from "../config/site";
+import { trackConversion } from "../lib/trackConversion";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { useSEO } from "../hooks/useSEO";
 import { FAQSection } from "../components/FAQSection";
@@ -58,6 +59,7 @@ export function LocationDetail() {
            </p>
            <a
               href={SITE_PHONE_TEL_HREF}
+              onClick={(e) => trackConversion(e, "phone")}
               className="inline-flex items-center justify-center space-x-2 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 px-8 py-4 text-lg font-semibold text-white transition-all hover:-translate-y-1 hover:shadow-xl shadow-lg shadow-red-500/40 border-t border-red-400/30"
             >
               <PhoneCall className="h-6 w-6" />
