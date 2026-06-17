@@ -71,6 +71,12 @@ function serve(dir, port) {
 }
 
 async function main() {
+  // Vercel build ortamında Chrome sistem kütüphaneleri yok (libnspr4 vb.)
+  if (process.env.VERCEL || process.env.SKIP_PRERENDER) {
+    console.log("Prerender atlanıyor (Vercel/CI ortamı).");
+    return;
+  }
+
   if (!fs.existsSync(DIST)) {
     console.error("dist/ bulunamadı — önce `npm run build` çalıştırın.");
     process.exit(1);
