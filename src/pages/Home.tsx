@@ -9,6 +9,7 @@ import { avrupaYakasiIlceleri, generateSlug } from "../data/locations";
 import { WhatsAppIcon } from "../components/icons";
 import { useSEO } from "../hooks/useSEO";
 import { BrandTicker } from "../components/BrandTicker";
+import { GoogleReviewsSection } from "../components/GoogleReviewsSection";
 import { PictureImg } from "../components/PictureImg";
 import { SERVICE_CARD_IMAGES } from "../data/serviceCardImages";
 
@@ -205,8 +206,10 @@ export function Home() {
         </div>
       </section>
 
+      <GoogleReviewsSection />
+
       {/* Services summary */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
           <div className="relative h-[420px] w-full overflow-hidden rounded-3xl shadow-2xl md:h-[500px] lg:w-1/2">
             <div className="absolute inset-0" aria-hidden>

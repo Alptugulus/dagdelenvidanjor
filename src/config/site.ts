@@ -18,6 +18,9 @@ export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/hero/slide-1.webp`;
 /** Google Haritalar — işletme / adres konumu */
 export const SITE_GOOGLE_MAPS_URL = "https://maps.app.goo.gl/n5LLjFaAaxWEJQ2X9";
 
+/** Google müşteri yorumları paylaşım / profil linki */
+export const SITE_GOOGLE_REVIEWS_URL = "https://share.google/We1SUQTejytOS0F4n";
+
 /**
  * Google Haritalar’da kayıtlı işletme adı (gömülü kart / sayfa başlığı ile uyumlu).
  * Haritada “yer bilgileri yüklenemedi” hatasını önlemek için embed URL’si bu kayda bağlı olmalı.
