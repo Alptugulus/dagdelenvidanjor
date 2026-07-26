@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
 import {
   GOOGLE_RATING,
@@ -9,6 +9,8 @@ import { SITE_GOOGLE_REVIEWS_URL, SITE_NAME } from "../config/site";
 
 const AUTO_MS = 6000;
 const PAGE_SIZE_DESKTOP = 5;
+/** Nokta göstergesi yerine sayaç eşiği */
+const DOT_LIMIT = 7;
 
 function Stars({ rating, size = "md" }: { rating: number; size?: "sm" | "md" | "lg" }) {
   const dim = size === "lg" ? "h-6 w-6" : size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
@@ -51,7 +53,7 @@ function GoogleMark({ className = "h-6 w-6" }: { className?: string }) {
 function ReviewCard({ review }: { review: GoogleReview }) {
   const initial = review.author.trim().charAt(0).toUpperCase() || "?";
   return (
-    <article className="flex h-full min-h-[220px] flex-col rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6">
+    <article className="flex h-full min-h-[200px] w-full min-w-0 flex-col rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:min-h-[220px] sm:p-6">
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2.5">
           <div
@@ -70,7 +72,7 @@ function ReviewCard({ review }: { review: GoogleReview }) {
         <GoogleMark className="h-4 w-4 shrink-0 opacity-90" />
       </div>
       <Stars rating={review.rating} size="sm" />
-      <p className="mt-3 line-clamp-6 flex-1 text-sm leading-relaxed text-slate-600">
+      <p className="mt-3 line-clamp-6 flex-1 break-words text-sm leading-relaxed text-slate-600">
         “{review.text}”
       </p>
     </article>
@@ -87,7 +89,7 @@ function chunkReviews(reviews: GoogleReview[], size: number): GoogleReview[][] {
 }
 
 function usePageSize() {
-  const [pageSize, setPageSize] = useState(PAGE_SIZE_DESKTOP);
+  const [pageSize, setPageSize] = useState(1);
 
   useEffect(() => {
     const update = () => {
@@ -112,6 +114,7 @@ export function GoogleReviewsSection() {
   const pages = useMemo(() => chunkReviews(reviews, pageSize), [reviews, pageSize]);
   const [page, setPage] = useState(0);
   const [paused, setPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     setPage(0);
@@ -136,10 +139,13 @@ export function GoogleReviewsSection() {
     setPage((next + pages.length) % pages.length);
   };
 
+  const showDots = pages.length > 1 && pages.length <= DOT_LIMIT;
+  const showCounter = pages.length > DOT_LIMIT;
+
   return (
-    <section className="bg-white py-20" aria-labelledby="google-reviews-heading">
+    <section className="overflow-x-hidden bg-white py-16 sm:py-20" aria-labelledby="google-reviews-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-sm font-medium text-slate-700">
             <GoogleMark className="h-4 w-4" />
             Google yorumları
@@ -150,11 +156,11 @@ export function GoogleReviewsSection() {
           >
             Müşterilerimiz Ne Diyor?
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-base text-slate-600 sm:text-lg">
             {SITE_NAME} hakkında Google’da paylaşılan gerçek müşteri değerlendirmeleri.
           </p>
 
-          <div className="mt-8 inline-flex flex-col items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-8 py-5 sm:flex-row sm:gap-6">
+          <div className="mt-8 inline-flex max-w-full flex-col items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-6 py-5 sm:flex-row sm:gap-6 sm:px-8">
             <div className="flex items-center gap-3">
               <GoogleMark className="h-8 w-8" />
               <div className="text-left">
@@ -173,7 +179,7 @@ export function GoogleReviewsSection() {
 
         {hasReviews ? (
           <div
-            className="relative"
+            className="relative min-w-0"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
             onFocusCapture={() => setPaused(true)}
@@ -182,11 +188,25 @@ export function GoogleReviewsSection() {
                 setPaused(false);
               }
             }}
+            onTouchStart={(e) => {
+              touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+              setPaused(true);
+            }}
+            onTouchEnd={(e) => {
+              const start = touchStartX.current;
+              const end = e.changedTouches[0]?.clientX;
+              touchStartX.current = null;
+              setPaused(false);
+              if (start == null || end == null) return;
+              const delta = end - start;
+              if (Math.abs(delta) < 48) return;
+              go(delta < 0 ? page + 1 : page - 1);
+            }}
           >
             <div className="overflow-hidden" aria-live="polite">
               <div
                 key={`${pageSize}-${page}`}
-                className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 animate-fade-slide"
+                className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 animate-fade-slide"
               >
                 {pages[page]?.map((review, i) => (
                   <ReviewCard
@@ -198,34 +218,51 @@ export function GoogleReviewsSection() {
             </div>
 
             {pages.length > 1 ? (
-              <div className="mt-8 flex items-center justify-center gap-3">
+              <div className="mt-8 flex min-w-0 items-center justify-center gap-2 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => go(page - 1)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
                   aria-label="Önceki yorumlar"
                 >
                   <ChevronLeft className="h-5 w-5" aria-hidden />
                 </button>
-                <div className="flex items-center gap-1.5" role="tablist" aria-label="Yorum sayfaları">
-                  {pages.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      role="tab"
-                      aria-selected={i === page}
-                      aria-label={`Sayfa ${i + 1} / ${pages.length}`}
-                      onClick={() => setPage(i)}
-                      className={`h-2.5 rounded-full transition-all ${
-                        i === page ? "w-8 bg-red-500" : "w-2.5 bg-slate-300 hover:bg-slate-400"
-                      }`}
-                    />
-                  ))}
-                </div>
+
+                {showDots ? (
+                  <div
+                    className="flex max-w-[min(100%,14rem)] flex-wrap items-center justify-center gap-1.5"
+                    role="tablist"
+                    aria-label="Yorum sayfaları"
+                  >
+                    {pages.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        role="tab"
+                        aria-selected={i === page}
+                        aria-label={`Sayfa ${i + 1} / ${pages.length}`}
+                        onClick={() => setPage(i)}
+                        className={`h-2.5 rounded-full transition-all ${
+                          i === page ? "w-8 bg-red-500" : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                ) : null}
+
+                {showCounter ? (
+                  <p
+                    className="min-w-[4.5rem] text-center text-sm font-medium tabular-nums text-slate-600"
+                    aria-live="polite"
+                  >
+                    {page + 1} / {pages.length}
+                  </p>
+                ) : null}
+
                 <button
                   type="button"
                   onClick={() => go(page + 1)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
                   aria-label="Sonraki yorumlar"
                 >
                   <ChevronRight className="h-5 w-5" aria-hidden />
@@ -240,11 +277,11 @@ export function GoogleReviewsSection() {
             href={SITE_GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+            className="inline-flex max-w-full items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md sm:px-6 sm:text-base"
           >
-            <GoogleMark className="h-5 w-5" />
-            Google’da tüm yorumları gör
-            <ExternalLink className="h-4 w-4 text-slate-400" aria-hidden />
+            <GoogleMark className="h-5 w-5 shrink-0" />
+            <span className="truncate">Google’da tüm yorumları gör</span>
+            <ExternalLink className="h-4 w-4 shrink-0 text-slate-400" aria-hidden />
           </a>
         </div>
       </div>
