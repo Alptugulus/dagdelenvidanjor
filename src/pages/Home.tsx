@@ -12,6 +12,7 @@ import { BrandTicker } from "../components/BrandTicker";
 import { GoogleReviewsSection } from "../components/GoogleReviewsSection";
 import { PictureImg } from "../components/PictureImg";
 import { SERVICE_CARD_IMAGES } from "../data/serviceCardImages";
+import { posts } from "../data/posts";
 
 /** Ana sayfa “hizmet özeti” slaytı — listedeki maddelerle uyumlu, /hizmetlerimiz kartlarıyla aynı görseller */
 const SERVICE_SHOWCASE_SLIDES = [
@@ -296,6 +297,44 @@ export function Home() {
             </Link>
           </div>
          </div>
+      </section>
+
+      <section className="bg-white py-20" aria-labelledby="home-blog-heading">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <h2 id="home-blog-heading" className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+              Blog’dan Faydalı Bilgiler
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Kanal tıkanıklığı, fosseptik çekimi ve yağ tutucu bakımı hakkında pratik rehberler.
+            </p>
+          </div>
+          <ul className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="block h-full rounded-2xl border border-slate-100 bg-slate-50 p-6 transition hover:border-slate-200 hover:shadow-sm"
+                >
+                  <h3 className="text-lg font-semibold text-slate-900">
+                    {post.seoTitle ?? post.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{post.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-red-600">
+                    Devamını oku
+                    <ChevronRight className="ml-1 h-4 w-4" aria-hidden />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 text-center">
+            <Link to="/blog" className="inline-flex items-center font-semibold text-red-600 hover:text-red-700">
+              Tüm blog yazıları
+              <ChevronRight className="ml-1 h-5 w-5" aria-hidden />
+            </Link>
+          </div>
+        </div>
       </section>
 
       <BrandTicker />

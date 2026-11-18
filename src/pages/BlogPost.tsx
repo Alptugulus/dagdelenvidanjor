@@ -20,13 +20,16 @@ export function BlogPost() {
   const wordCount = post.content.split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / 200) || 1;
 
+  const documentTitle = post.seoTitle ?? post.title;
+  const relatedPosts = posts.filter((p) => p.slug !== post.slug).slice(0, 2);
+
   useSEO({
-    title: post.title,
+    title: documentTitle,
     description: post.excerpt,
     ogImage: post.image,
     breadcrumbs: [
       { name: "Blog", url: "/blog" },
-      { name: post.title, url: `/blog/${post.slug}` },
+      { name: documentTitle, url: `/blog/${post.slug}` },
     ],
   });
 
@@ -35,7 +38,7 @@ export function BlogPost() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[
           { name: "Blog", url: "/blog" },
-          { name: post.title, url: `/blog/${post.slug}` }
+          { name: documentTitle, url: `/blog/${post.slug}` }
         ]} />
 
         <div className="mb-8">
@@ -81,6 +84,32 @@ export function BlogPost() {
             <Markdown>{post.content}</Markdown>
           </div>
         </div>
+
+        {relatedPosts.length > 0 ? (
+          <section className="mt-14 border-b border-slate-100 pb-14" aria-labelledby="related-posts-heading">
+            <h2 id="related-posts-heading" className="mb-6 text-2xl font-semibold text-slate-900">
+              İlgili Yazılar
+            </h2>
+            <ul className="space-y-4">
+              {relatedPosts.map((related) => (
+                <li key={related.slug}>
+                  <Link
+                    to={`/blog/${related.slug}`}
+                    className="font-medium text-red-600 hover:text-red-700"
+                  >
+                    {related.seoTitle ?? related.title}
+                  </Link>
+                  <p className="mt-1 text-sm text-slate-600">{related.excerpt}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6">
+              <Link to="/hizmetlerimiz" className="font-medium text-slate-700 underline-offset-4 hover:text-red-600 hover:underline">
+                Vidanjör ve altyapı hizmetlerimizi inceleyin
+              </Link>
+            </p>
+          </section>
+        ) : null}
 
         <div className="mt-16">
           <CTASection

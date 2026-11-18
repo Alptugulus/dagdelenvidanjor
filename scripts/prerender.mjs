@@ -147,6 +147,15 @@ const PAGES = [
               .join("")}
           </ul>
           <p><a href="/hizmet-bolgeleri">Tüm Hizmet Bölgelerini Gör</a></p>
+        </section>
+        <section>
+          <h2>Blog’dan Faydalı Bilgiler</h2>
+          <ul>
+            <li><a href="/blog/kanal-tikanikligi-aninda-ne-yapilmali">Kanal Tıkanıklığı Anında Ne Yapılmalı?</a></li>
+            <li><a href="/blog/fosseptik-cekimi-ne-zaman-gerekir">Fosseptik Çekimi Ne Zaman Gerekir?</a></li>
+            <li><a href="/blog/isletmeler-icin-yag-tutucu-bakim-rehberi">Restoran ve Kafeler İçin Yağ Tutucu Bakım Rehberi</a></li>
+          </ul>
+          <p><a href="/blog">Tüm blog yazıları</a></p>
         </section>`,
     }),
   },
@@ -165,9 +174,9 @@ const PAGES = [
   },
   {
     path: "/hizmetlerimiz",
-    title: "Hizmetlerimiz - Teknolojik Altyapı & Vidanjör",
+    title: "Hizmetlerimiz - Vidanjör ve Altyapı",
     description:
-      "Kameralı görüntüleme, robotla gider açma, dedektörle tespit, mini ve kombine vidanjör, vidanjör ve foseptik çekimi, yağ tutucu ve tahliye hizmetleri. Kırmadan tespit ve 20 yıllık tecrübe.",
+      "Kameralı görüntüleme, robotla gider açma, vidanjör ve foseptik çekimi. Kırmadan tespit, 20 yıllık tecrübe.",
     body: shell({
       h1: "Hizmetlerimiz",
       lead: "20 Yıllık Tecrübe ile hem teknolojik altyapı çözümlerinde Kırmadan Tespit hem de vidanjör ve tahliye operasyonlarında uçtan uca hizmet sunuyoruz.",
@@ -236,7 +245,15 @@ const PAGES = [
           <a href="/hizmet-bolgeleri/avrupa-yakasi/esenyurt">Esenyurt</a>,
           <a href="/hizmet-bolgeleri/avrupa-yakasi/beylikduzu">Beylikdüzü</a>,
           <a href="/hizmet-bolgeleri/avrupa-yakasi/avcilar">Avcılar</a>.
-        </p>`,
+        </p>
+        <section>
+          <h2>Faydalı Bilgiler</h2>
+          <ul>
+            <li><a href="/blog/kanal-tikanikligi-aninda-ne-yapilmali">Kanal Tıkanıklığı Anında Ne Yapılmalı?</a></li>
+            <li><a href="/blog/fosseptik-cekimi-ne-zaman-gerekir">Fosseptik Çekimi Ne Zaman Gerekir?</a></li>
+            <li><a href="/blog/isletmeler-icin-yag-tutucu-bakim-rehberi">Restoran ve Kafeler İçin Yağ Tutucu Bakım Rehberi</a></li>
+          </ul>
+        </section>`,
     }),
   },
   {
@@ -287,7 +304,7 @@ const PAGES = [
   },
   {
     path: "/blog/kanal-tikanikligi-aninda-ne-yapilmali",
-    title: "Kanal Tıkanıklığı Anında Ne Yapılmalı? Ev ve İş Yeri İçin Pratik Rehber",
+    title: "Kanal Tıkanıklığı Anında Ne Yapılmalı?",
     description:
       "Kanal tıkanıklığında yanlış müdahale hem maliyeti artırır hem de taşkına yol açabilir. Doğru adımlar ve profesyonel destek zamanı bu rehberde.",
     body: shell({
@@ -295,12 +312,17 @@ const PAGES = [
       lead: "Kanal tıkanıklığında yanlış müdahale hem maliyeti artırır hem de taşkına yol açabilir. Doğru adımlar ve profesyonel destek zamanı bu rehberde.",
       main: `
         <p>Kanal tıkanıklığı fark edildiğinde ilk kural panik yapmadan su kullanımını durdurmaktır.</p>
+        <h2>İlgili Yazılar</h2>
+        <ul>
+          <li><a href="/blog/fosseptik-cekimi-ne-zaman-gerekir">Fosseptik Çekimi Ne Zaman Gerekir?</a></li>
+          <li><a href="/blog/isletmeler-icin-yag-tutucu-bakim-rehberi">Restoran ve Kafeler İçin Yağ Tutucu Bakım Rehberi</a></li>
+        </ul>
         <p><a href="/blog">Tüm blog yazıları</a> · <a href="/hizmetlerimiz">Hizmetlerimiz</a></p>`,
     }),
   },
   {
     path: "/blog/fosseptik-cekimi-ne-zaman-gerekir",
-    title: "Fosseptik Çekimi Ne Zaman Gerekir? Taşma Yaşamadan Önlem Alın",
+    title: "Fosseptik Çekimi Ne Zaman Gerekir?",
     description:
       "Fosseptik dolumunu son ana bırakmak koku, taşma ve çevresel risk oluşturur. Doğru periyot ve erken uyarı belirtilerini öğrenin.",
     body: shell({
@@ -308,6 +330,11 @@ const PAGES = [
       lead: "Fosseptik dolumunu son ana bırakmak koku, taşma ve çevresel risk oluşturur. Doğru periyot ve erken uyarı belirtilerini öğrenin.",
       main: `
         <p>Fosseptik sistemlerinde geciken çekim, taşma ve kötü koku dışında altyapı hatlarında geri basınca neden olabilir.</p>
+        <h2>İlgili Yazılar</h2>
+        <ul>
+          <li><a href="/blog/kanal-tikanikligi-aninda-ne-yapilmali">Kanal Tıkanıklığı Anında Ne Yapılmalı?</a></li>
+          <li><a href="/blog/isletmeler-icin-yag-tutucu-bakim-rehberi">Restoran ve Kafeler İçin Yağ Tutucu Bakım Rehberi</a></li>
+        </ul>
         <p><a href="/blog">Tüm blog yazıları</a> · <a href="/hizmetlerimiz">Hizmetlerimiz</a></p>`,
     }),
   },
@@ -321,6 +348,11 @@ const PAGES = [
       lead: "Yağ tutucu temizliği geciktiğinde gider tıkanıklığı, kötü koku ve operasyon aksaması kaçınılmaz olur. İşletmeler için net bakım planı burada.",
       main: `
         <p>Periyodik yağ tutucu temizliği işletme sürekliliği ve altyapı sağlığı için gereklidir.</p>
+        <h2>İlgili Yazılar</h2>
+        <ul>
+          <li><a href="/blog/kanal-tikanikligi-aninda-ne-yapilmali">Kanal Tıkanıklığı Anında Ne Yapılmalı?</a></li>
+          <li><a href="/blog/fosseptik-cekimi-ne-zaman-gerekir">Fosseptik Çekimi Ne Zaman Gerekir?</a></li>
+        </ul>
         <p><a href="/blog">Tüm blog yazıları</a> · <a href="/hizmetlerimiz">Hizmetlerimiz</a></p>`,
     }),
   },

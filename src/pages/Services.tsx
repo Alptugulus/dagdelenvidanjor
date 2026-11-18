@@ -234,9 +234,9 @@ const category2Services: ServiceCard[] = [
 
 export function Services() {
   useSEO({
-    title: "Hizmetlerimiz - Teknolojik Altyapı & Vidanjör",
+    title: "Hizmetlerimiz - Vidanjör ve Altyapı",
     description:
-      "Kameralı görüntüleme, robotla gider açma, dedektörle tespit, mini ve kombine vidanjör, vidanjör ve foseptik çekimi, yağ tutucu ve tahliye hizmetleri. Kırmadan tespit ve 20 yıllık tecrübe.",
+      "Kameralı görüntüleme, robotla gider açma, vidanjör ve foseptik çekimi. Kırmadan tespit, 20 yıllık tecrübe.",
     breadcrumbs: [{ name: "Hizmetlerimiz", url: "/hizmetlerimiz" }],
   });
 
@@ -327,6 +327,32 @@ export function Services() {
             bölgelerinde yoğun talep yönetimi.
           </p>
         </div>
+
+        <section className="mb-16 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8" aria-labelledby="services-blog-heading">
+          <h2 id="services-blog-heading" className="text-2xl font-bold text-slate-900 md:text-3xl">
+            Faydalı Bilgiler
+          </h2>
+          <p className="mt-3 max-w-3xl text-slate-600">
+            Hizmetlerimizle ilgili pratik rehberler — tıkanıklık, fosseptik ve yağ tutucu bakımı.
+          </p>
+          <ul className="mt-6 space-y-3">
+            <li>
+              <Link to="/blog/kanal-tikanikligi-aninda-ne-yapilmali" className="font-medium text-red-600 hover:text-red-700">
+                Kanal Tıkanıklığı Anında Ne Yapılmalı?
+              </Link>
+            </li>
+            <li>
+              <Link to="/blog/fosseptik-cekimi-ne-zaman-gerekir" className="font-medium text-red-600 hover:text-red-700">
+                Fosseptik Çekimi Ne Zaman Gerekir?
+              </Link>
+            </li>
+            <li>
+              <Link to="/blog/isletmeler-icin-yag-tutucu-bakim-rehberi" className="font-medium text-red-600 hover:text-red-700">
+                Restoran ve Kafeler İçin Yağ Tutucu Bakım Rehberi
+              </Link>
+            </li>
+          </ul>
+        </section>
 
         <CTASection title="Vidanjör Hizmetine mi İhtiyacınız Var?" />
       </div>

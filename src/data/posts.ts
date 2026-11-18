@@ -2,6 +2,8 @@ export interface BlogPost {
   id: number;
   slug: string;
   title: string;
+  /** Kısa <title> / OG başlığı; yoksa `title` kullanılır */
+  seoTitle?: string;
   excerpt: string;
   date: string;
   author: string;
@@ -14,6 +16,7 @@ export const posts: BlogPost[] = [
     id: 1,
     slug: "kanal-tikanikligi-aninda-ne-yapilmali",
     title: "Kanal Tıkanıklığı Anında Ne Yapılmalı? Ev ve İş Yeri İçin Pratik Rehber",
+    seoTitle: "Kanal Tıkanıklığı Anında Ne Yapılmalı?",
     excerpt:
       "Kanal tıkanıklığında yanlış müdahale hem maliyeti artırır hem de taşkına yol açabilir. Doğru adımlar ve profesyonel destek zamanı bu rehberde.",
     date: "07 Mayıs 2026",
@@ -54,6 +57,7 @@ Böylece aynı sorunun tekrar etme olasılığı ciddi biçimde azalır.
     id: 2,
     slug: "fosseptik-cekimi-ne-zaman-gerekir",
     title: "Fosseptik Çekimi Ne Zaman Gerekir? Taşma Yaşamadan Önlem Alın",
+    seoTitle: "Fosseptik Çekimi Ne Zaman Gerekir?",
     excerpt:
       "Fosseptik dolumunu son ana bırakmak koku, taşma ve çevresel risk oluşturur. Doğru periyot ve erken uyarı belirtilerini öğrenin.",
     date: "07 Mayıs 2026",
